@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="hyperapp 是什么鬼？hyperapp 是一个前端的应用构建库。初见写法，很有一种写react的亲切的感觉（其实就是一个套路），不过这肯定不能成为吸引广发gay友从而在短短两个月拿到 8K star的理由。更重要的一个原因是 官方宣称的1kb。是的， hyperapp 的核心代码只有1kb，这对早已习惯react全家桶，同时对当今web应用一个页面动辄3、4M毒害的gay友来说，的确是一个福">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hyperapp.js 一个轻量级的 react 实现">
+<meta property="og:url" content="http://yoursite.com/2018/01/27/hyperapp-js-一个轻量级的-react-实现/index.html">
+<meta property="og:site_name" content="太平的流水帐">
+<meta property="og:description" content="hyperapp 是什么鬼？hyperapp 是一个前端的应用构建库。初见写法，很有一种写react的亲切的感觉（其实就是一个套路），不过这肯定不能成为吸引广发gay友从而在短短两个月拿到 8K star的理由。更重要的一个原因是 官方宣称的1kb。是的， hyperapp 的核心代码只有1kb，这对早已习惯react全家桶，同时对当今web应用一个页面动辄3、4M毒害的gay友来说，的确是一个福">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-27T02:31:07.187Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hyperapp.js 一个轻量级的 react 实现">
+<meta name="twitter:description" content="hyperapp 是什么鬼？hyperapp 是一个前端的应用构建库。初见写法，很有一种写react的亲切的感觉（其实就是一个套路），不过这肯定不能成为吸引广发gay友从而在短短两个月拿到 8K star的理由。更重要的一个原因是 官方宣称的1kb。是的， hyperapp 的核心代码只有1kb，这对早已习惯react全家桶，同时对当今web应用一个页面动辄3、4M毒害的gay友来说，的确是一个福">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/27/hyperapp-js-一个轻量级的-react-实现/"/>
+
+
+
+
+
+  <title>hyperapp.js 一个轻量级的 react 实现 | 太平的流水帐</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">太平的流水帐</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/27/hyperapp-js-一个轻量级的-react-实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="太平">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="太平的流水帐">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">hyperapp.js 一个轻量级的 react 实现</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-27T10:23:16+08:00">
+                2018-01-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="hyperapp-是什么鬼？"><a href="#hyperapp-是什么鬼？" class="headerlink" title="hyperapp 是什么鬼？"></a>hyperapp 是什么鬼？</h2><p>hyperapp 是一个前端的应用构建库。初见写法，很有一种写react的亲切的感觉（其实就是一个套路），不过这肯定不能成为吸引广发gay友从而在短短两个月拿到 8K star的理由。更重要的一个原因是 官方宣称的1kb。是的， hyperapp 的核心代码只有1kb，这对早已习惯react全家桶，同时对当今web应用一个页面动辄3、4M毒害的gay友来说，的确是一个福音。基于此，官方给自己的定位是：</p>
+<ol>
+<li>更小：只要1kb，做到其他框架应该做的；</li>
+<li>更实用：主流的前端应用思想，不会对学习带来额外负担；</li>
+<li>开箱即用：完善的虚拟Dom、key更新、应用生命周期。</li>
+<li>以上个人翻译，有吹嘘成分</li>
+</ol>
+<p>既然听起来这么厉害，今天就来一探究竟了……</p>
+<p>##简单的使用</p>
+<p>最简单的使用方法就是看官网给的 计数器 示例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">&lt;script src=&quot;https://unpkg.com/hyperapp&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line"></span><br><span class="line">// ******划重点</span><br><span class="line"></span><br><span class="line">const &#123; h, app &#125; = hyperapp</span><br><span class="line"></span><br><span class="line">const state = &#123;</span><br><span class="line">  count: 0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const actions = &#123;</span><br><span class="line">  down: value =&gt; state =&gt; (&#123; count: state.count - value &#125;),</span><br><span class="line">  up: value =&gt; state =&gt; (&#123; count: state.count + value &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const view = (state, actions) =&gt;</span><br><span class="line">  h(&quot;div&quot;, &#123;&#125;, [</span><br><span class="line">    h(&quot;h1&quot;, &#123;&#125;, state.count),</span><br><span class="line">    h(&quot;button&quot;, &#123; onclick: () =&gt; actions.down(1) &#125;, &quot;–&quot;),</span><br><span class="line">    h(&quot;button&quot;, &#123; onclick: () =&gt; actions.up(1) &#125;, &quot;+&quot;)</span><br><span class="line">  ])</span><br><span class="line"></span><br><span class="line">window.main = app(state, actions, view, document.body)</span><br><span class="line"></span><br><span class="line">// *****划重点</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+<p>显而易见，state 定义了应用的状态， view 定义了应用的视图，通过 h 方法生成一个虚拟Dom,也就是可以被浏览器解释的结点树，action 则定义了应用的一些行为逻辑，最后在通过 app 方法挂载到真实的Dom元素结点上。</p>
+<p>当然这只是很简单的使用。对于已经习惯了react写法的我们来说，我们可能在 view 的部分更习惯写纯函数，或者说一些牵扯到生命周期的操作，当然这些在 hyperapp 中也是可以的。</p>
+<p>具体的操作可以参考 <a href="https://github.com/hyperapp/hyperapp/blob/master/docs/concepts/" target="_blank" rel="noopener">官方文档</a>。</p>
+<h2 id="看源码吧还是"><a href="#看源码吧还是" class="headerlink" title="看源码吧还是"></a>看源码吧还是</h2><p>当然学习使用不是我们的目的，这些操作其他库中都有实现，真正感兴趣的是他说的1kb，所以还是来看源码吧（讲真，源码写的有点绕）。</p>
+<p>核心的方法只有两个，h 函数 和 app 函数，h函数很简单，只是用来构建 dom 结点的。源码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 先来看h的用法，作用是生成一个虚拟dom节点</span><br><span class="line"> * name 可以是 一个标签名字符串，如‘div’, 也可以是一个已经被渲染的component，如‘h(div,&apos;&apos;,)’</span><br><span class="line"> * props 标签的属性定义，如‘class’，事件等</span><br><span class="line"> * 不定参数，都会当做当前节点的子节点计算</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">export function h(name, props) &#123;</span><br><span class="line">  var node</span><br><span class="line">  var stack = []</span><br><span class="line">  var children = []</span><br><span class="line"></span><br><span class="line">  for (var i = arguments.length; i-- &gt; 2; ) &#123;</span><br><span class="line">    stack.push(arguments[i])</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  while (stack.length) &#123;</span><br><span class="line">    if (Array.isArray((node = stack.pop()))) &#123;</span><br><span class="line">      for (i = node.length; i--; ) &#123;</span><br><span class="line">        stack.push(node[i])</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; else if (null == node || true === node || false === node) &#123;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      children.push(typeof node === &quot;number&quot; ? node + &quot;&quot; : node)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return typeof name === &quot;string&quot;</span><br><span class="line">    ? &#123;</span><br><span class="line">        name: name,</span><br><span class="line">        props: props || &#123;&#125;,</span><br><span class="line">        children: children</span><br><span class="line">      &#125;</span><br><span class="line">    : name(props || &#123;&#125;, children)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其实就是确保在入口的 repaint 方法每次被调用的时候先执行 init 方法。</p>
+<p>我们来看 init 方法的主体部分：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">// actions 有两种情况，一种是参数只存在state的情况，一种是参数存在state和action的情况,又是讨厌的递归</span><br><span class="line">  function init(path, slice, actions) &#123;</span><br><span class="line">    for (var key in actions) &#123;</span><br><span class="line">      typeof actions[key] === &quot;function&quot;</span><br><span class="line">        ? (function(key, action) &#123;</span><br><span class="line">            actions[key] = function(data) &#123;</span><br><span class="line"></span><br><span class="line">              // 第一次初始化的时候，path为[]，所以得到的还是初始传入的state</span><br><span class="line">              slice = get(path, state)  </span><br><span class="line"></span><br><span class="line">              // actions参数中存在action的情况，同时执行重新渲染一次</span><br><span class="line">              if (typeof (data = action(data)) === &quot;function&quot;) &#123;</span><br><span class="line">                data = data(slice, actions)</span><br><span class="line">              &#125;</span><br><span class="line"></span><br><span class="line">              if (data &amp;&amp; data !== slice &amp;&amp; !data.then) &#123;</span><br><span class="line">                repaint((state = set(path, copy(slice, data), state, &#123;&#125;)))</span><br><span class="line">              &#125;</span><br><span class="line"></span><br><span class="line">              return data</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;)(key, actions[key])</span><br><span class="line">        : init(</span><br><span class="line">            path.concat(key),</span><br><span class="line">            (slice[key] = slice[key] || &#123;&#125;),</span><br><span class="line">            (actions[key] = copy(actions[key]))</span><br><span class="line">          )</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>其实 init 方法的目的就是确保了两种执行 repaint 方法的不同情况（有个看源码的小技巧就是去看官方提供的单元测试，来反推某个方法的用法）。init 方法的目的是执行 repaint 方法（真实渲染的方法入口，最终会执行 patch 方法）。</p>
+<h2 id="patch"><a href="#patch" class="headerlink" title="patch()"></a>patch()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">function patch(parent, element, oldNode, node, isSVG, nextSibling) &#123;</span><br><span class="line">    if (node === oldNode) &#123;</span><br><span class="line">    &#125; else if (null == oldNode) &#123;</span><br><span class="line">      element = parent.insertBefore(createElement(node, isSVG), element)</span><br><span class="line">    &#125; else if (node.name &amp;&amp; node.name === oldNode.name) &#123;</span><br><span class="line">      updateElement(element, oldNode.props, node.props)</span><br><span class="line"></span><br><span class="line">      var oldElements = []</span><br><span class="line">      var oldKeyed = &#123;&#125;</span><br><span class="line">      var newKeyed = &#123;&#125;</span><br><span class="line"></span><br><span class="line">      for (var i = 0; i &lt; oldNode.children.length; i++) &#123;</span><br><span class="line">        oldElements[i] = element.childNodes[i]</span><br><span class="line"></span><br><span class="line">        var oldChild = oldNode.children[i]</span><br><span class="line">        var oldKey = getKey(oldChild)</span><br><span class="line"></span><br><span class="line">        if (null != oldKey) &#123;</span><br><span class="line">          oldKeyed[oldKey] = [oldElements[i], oldChild]</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      var i = 0</span><br><span class="line">      var j = 0</span><br><span class="line"></span><br><span class="line">      while (j &lt; node.children.length) &#123;</span><br><span class="line">        var oldChild = oldNode.children[i]</span><br><span class="line">        var newChild = node.children[j]</span><br><span class="line"></span><br><span class="line">        var oldKey = getKey(oldChild)</span><br><span class="line">        var newKey = getKey(newChild)</span><br><span class="line"></span><br><span class="line">        if (newKeyed[oldKey]) &#123;</span><br><span class="line">          i++</span><br><span class="line">          continue</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (null == newKey) &#123;</span><br><span class="line">          if (null == oldKey) &#123;</span><br><span class="line">            patch(element, oldElements[i], oldChild, newChild, isSVG)</span><br><span class="line">            j++</span><br><span class="line">          &#125;</span><br><span class="line">          i++</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">          var recyledNode = oldKeyed[newKey] || []</span><br><span class="line"></span><br><span class="line">          if (oldKey === newKey) &#123;</span><br><span class="line">            patch(element, recyledNode[0], recyledNode[1], newChild, isSVG)</span><br><span class="line">            i++</span><br><span class="line">          &#125; else if (recyledNode[0]) &#123;</span><br><span class="line">            patch(</span><br><span class="line">              element,</span><br><span class="line">              element.insertBefore(recyledNode[0], oldElements[i]),</span><br><span class="line">              recyledNode[1],</span><br><span class="line">              newChild,</span><br><span class="line">              isSVG</span><br><span class="line">            )</span><br><span class="line">          &#125; else &#123;</span><br><span class="line">            patch(element, oldElements[i], null, newChild, isSVG)</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          j++</span><br><span class="line">          newKeyed[newKey] = newChild</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      while (i &lt; oldNode.children.length) &#123;</span><br><span class="line">        var oldChild = oldNode.children[i]</span><br><span class="line">        if (null == getKey(oldChild)) &#123;</span><br><span class="line">          removeElement(element, oldElements[i], oldChild)</span><br><span class="line">        &#125;</span><br><span class="line">        i++</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      for (var i in oldKeyed) &#123;</span><br><span class="line">        if (!newKeyed[oldKeyed[i][1].props.key]) &#123;</span><br><span class="line">          removeElement(element, oldKeyed[i][0], oldKeyed[i][1])</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; else if (node.name === oldNode.name) &#123;</span><br><span class="line">      element.nodeValue = node</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      element = parent.insertBefore(</span><br><span class="line">        createElement(node, isSVG),</span><br><span class="line">        (nextSibling = element)</span><br><span class="line">      )</span><br><span class="line">      removeElement(parent, nextSibling, oldNode)</span><br><span class="line">    &#125;</span><br><span class="line">    return element</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>具体的方法什么意思就不一一解释了，有一点要注意的是，这个库用了很多小套路，如果想要理解的话，最好先去好好理解下<br><a href="http://weizhifeng.net/immediately-invoked-function-expression.html" target="_blank" rel="noopener">JS 中的()是什么意思？</a></p>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p>太长就不放了，放个链接吧。［戳］(<a href="https://github.com/hyperapp/hyperapp/blob/master/src/index.js)。" target="_blank" rel="noopener">https://github.com/hyperapp/hyperapp/blob/master/src/index.js)。</a></p>
+<p>##　其他类似的<br>其实类似的实现还有 <a href="https://github.com/developit/preact" target="_blank" rel="noopener">preact</a>，不过 preact 大了一丢丢，但是在知名度和可靠性上肯定是 preact<br>遥遥领先的，本文只是用来学习，真正项目使用的话还是要慎重考虑的，优先考虑 react 和 preact 这些。</p>
+<p>##　总结<br>写到这里感觉自己也是似懂非懂的了，一定是源码看的太少了……</p>
+<p>以后继续加油，拜拜</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/27/国外便宜虚拟机汇总/" rel="next" title="国外便宜虚拟机汇总">
+                <i class="fa fa-chevron-left"></i> 国外便宜虚拟机汇总
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">太平</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#hyperapp-是什么鬼？"><span class="nav-number">1.</span> <span class="nav-text">hyperapp 是什么鬼？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#看源码吧还是"><span class="nav-number">2.</span> <span class="nav-text">看源码吧还是</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#patch"><span class="nav-number">3.</span> <span class="nav-text">patch()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码"><span class="nav-number">4.</span> <span class="nav-text">源码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">太平</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
