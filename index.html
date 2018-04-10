@@ -269,6 +269,344 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/10/Encrypt永久免费SSL证书过程教程及常见问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="太平">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="太平的流水帐">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/10/Encrypt永久免费SSL证书过程教程及常见问题/" itemprop="url">Encrypt永久免费SSL证书过程教程及常见问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-10T09:37:47+08:00">
+                2018-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/运维冷知识/" itemprop="url" rel="index">
+                    <span itemprop="name">运维冷知识</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>虽然目前Let’s Encrypt免费SSL证书默认是90天有效期，但是我们也可以到期自动续约，不影响我们的尝试和使用，为了考虑到文章的真实性和以后的实战性，老左准备利用一些时间分篇幅的展现在应用Let’s Encrypt证书的过程，这篇文章分享申请的方法教程。</p>
+</blockquote>
+<p><strong>第一、安装Let’s Encrypt前的准备工作</strong></p>
+<p>根据官方的要求，我们在VPS、服务器上部署Let’s Encrypt免费SSL证书之前，需要系统支持Python2.7以上版本以及支持GIT工具。这个需要根据我们不同的系统版本进行安装和升级，因为有些服务商提供的版本兼容是完善的，尤其是debian环境兼容性比CentOS好一些。<br>比如CentOS 6 64位环境不支持GIT，我们还可以参考”Linux CentOS 6 64位系统安装Git工具环境教程“和”9步骤升级CentOS5系统Python版本到2.7“进行安装和升级。最为 简单的就是Debian环境不支持，可以运行<br><code>apt-get -y install git</code><br>直接安装支持，如果是CentOS直接运行：<br><code>yum -y install git-core</code><br>支持。这个具体遇到问题在讨论和搜索解决方案，因为每个环境、商家发行版都可能不同。在这篇文章中，老左采用的是debian 7 环境</p>
+<p><strong>第二、快速获取Let’s Encrypt免费SSL证书</strong></p>
+<p>在之前的博文中老左也分享过几篇关于SSL部署的过程，我自己也搞的晕乎晕乎的，获取证书和布局还是比较复杂的，Let’s Encrypt肯定是考虑到推广HTTPS的普及型会让用户简单的获取和部署SSL证书，所以可以采用下面简单的一键部署获取证书。</p>
+<blockquote>
+<p>PS：在获取某个站点证书文件的时候，我们需要在安装PYTHON2.7以及GIT，更需要将域名解析到当前VPS主机IP中。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/letsencrypt/letsencrypt</span><br><span class="line"></span><br><span class="line">cd letsencrypt</span><br><span class="line"></span><br><span class="line">./letsencrypt-auto certonly --standalone --email admin@laozuo.org -d laozuo.org -d www.laozuo.org</span><br></pre></td></tr></table></figure>
+<p>然后执行上面的脚本，我们需要根据自己的实际站点情况将域名更换成自己需要部署的。<br>快速获取Let’s Encrypt免费SSL证书<br>看到这个界面，直接Agree回车。<br><img src="https://images.laozuo.org/wp-content/uploads/2015/12/letsencrypt-2.jpg" alt=""></p>
+<p>然后看到这个界面表示部署成功。目前根据大家的反馈以及老左的测试，如果域名是用的国内DNS，包括第三那方DNSPOD等，都可能获取不到域名信息。</p>
+<p><img src="https://images.laozuo.org/wp-content/uploads/2015/12/letsencrypt-3.jpg" alt=""></p>
+<p>这里我们可以看到有”The server could not connect to the client to verify the  domain”的错误提示信息，包括也有其他提示错误，”The server experienced an internal error :: Error creating new registration”我们在邮局的时候不要用国内免费邮局。所以，如果我们是海外域名就直接先用域名自带的DNS。</p>
+<p><img src="https://images.laozuo.org/wp-content/uploads/2015/12/letsencrypt-4.jpg" alt=""></p>
+<p><strong>第三、Let’s Encrypt免费SSL证书获取与应用</strong></p>
+<p>在完成Let’s Encrypt证书的生成之后，我们会在”/etc/letsencrypt/live/laozuo.org/“域名目录下有4个文件就是生成的密钥证书文件<br> cert.pem  - Apache服务器端证书<br> chain.pem  - Apache根证书和中继证书<br> fullchain.pem  - Nginx所需要ssl_certificate文件<br> privkey.pem - 安全证书KEY文件</p>
+<p>如果我们使用的Nginx环境，那就需要用到fullchain.pem和privkey.pem两个证书文件，在部署Nginx的时候需要用到（参考：<a href="http://www.laozuo.org/5571.html" target="_blank" rel="noopener">LNMP一键包环境安装SSL安全证书且部署HTTPS网站URL过程</a>）。在这篇文章中老左就不详细演示Let’s Encrypt证书证书的安装，后面再重新折腾一篇文章详细的部署证书的安装Nginx和Apache。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssl_certificate /etc/letsencrypt/live/laozuo.org/fullchain.pem;</span><br><span class="line">ssl_certificate_key /etc/letsencrypt/live/laozuo.org/privkey.pem;</span><br></pre></td></tr></table></figure>
+<p>比如我们在Nginx环境中，只要将对应的ssl_certificate和ssl_certificate_key路径设置成我们生成的2个文件就可以，最好不要移动和复制文件，因为续期的时候直接续期生成的目录文件就可以，不需要再手工复制。</p>
+<p><strong>第四、解决Let’s Encrypt免费SSL证书有效期问题</strong></p>
+<p>我们从生成的文件中可以看到，Let’s Encrypt证书是有效期90天的，需要我们自己手工更新续期才可以。</p>
+<p><code>./letsencrypt-auto certonly --renew-by-default --email admin@laozuo.org -d laozuo.org -d www.laozuo.org</code></p>
+<p>这样我们在90天内再去执行一次就可以解决续期问题，这样又可以继续使用90天。如果我们怕忘记的话也可以制作成定时执行任务，比如每个月执行一次。</p>
+<p><strong>第五、关于Let’s Encrypt免费SSL证书总结</strong></p>
+<blockquote>
+<p>通过以上几个步骤的学习和应用，我们肯定学会了利用Let’s Encrypt免费生成和获取SSL证书文件，随着Let’s Encrypt的应用普及，SSL以后直接免费不需要购买，因为大部分主流浏览器都支持且有更多的主流商家的支持和赞助，HTTPS以后看来也是趋势。在Let’s Encrypt执行过程在中我们需要解决几个问题。</p>
+</blockquote>
+<p>A - 域名DNS和解析问题。在配置Let’s Encrypt免费SSL证书的时候域名一定要解析到当前VPS服务器，而且DNS必须用到海外域名DNS，如果用国内免费DNS可能会导致获取不到错误。</p>
+<p>B - 安装Let’s Encrypt部署之前需要服务器支持PYTHON2.7以及GIT环境，要不无法部署。</p>
+<p>C - Let’s Encrypt默认是90天免费，需要手工或者自动续期才可以继续使用。</p>
+<h2 id="nginx-配置方法-红色部分替换-图上-标红的地方"><a href="#nginx-配置方法-红色部分替换-图上-标红的地方" class="headerlink" title="nginx 配置方法 红色部分替换 图上 标红的地方"></a>nginx 配置方法 红色部分替换 图上 标红的地方</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">	listen 80;</span><br><span class="line">	listen 443 ssl;</span><br><span class="line">	ssl_certificate /etc/letsencrypt/live/www.emenotec.com/fullchain.pem;</span><br><span class="line">	ssl_certificate_key /etc/letsencrypt/live/www.emenotec.com/privkey.pem;</span><br><span class="line">	ssl_ciphers “EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH”;</span><br><span class="line">	ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</span><br><span class="line">	ssl_prefer_server_ciphers on;</span><br><span class="line">	ssl_session_cache shared:SSL:10m;</span><br><span class="line">	server_name www.emenotec.com emenotec.com;</span><br><span class="line">	# rewrite ^(.*)$ https://$host$1 permanent;</span><br><span class="line">	# access_log /var/log/nginx/access.log main;</span><br><span class="line">	location / &#123;</span><br><span class="line">		root /www/magento2/blog;</span><br><span class="line">		index index.php index.html index.htm;</span><br><span class="line">		if (-f $request_filename/index.html)&#123;</span><br><span class="line">			rewrite (.*) $1/index.html break;</span><br><span class="line">		&#125;</span><br><span class="line">		if (-f $request_filename/index.php)&#123;</span><br><span class="line">			rewrite (.*) $1/index.php;</span><br><span class="line">		&#125;</span><br><span class="line">		if (!-f $request_filename)&#123;</span><br><span class="line">			rewrite (.*) /index.php;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	rewrite /wp-admin$ $scheme://$host$uri/ permanent;</span><br><span class="line">	location ~ \.php$ &#123;</span><br><span class="line">		root /www/magento2/blog;</span><br><span class="line">		fastcgi_pass unix:/run/php/php7.0-fpm.sock;</span><br><span class="line">		fastcgi_index index.php;</span><br><span class="line">		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</span><br><span class="line">		include fastcgi_params;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>证书上传添加到 stackpath</p>
+<p>自动续期<br>首先我们需要将可执行文件 移动一个公共目录。<br>如果要放到root目录下，只要处理好权限问题也是可以的。<br>手动延期</p>
+<p><code>./certbot-auto renew –dry-run</code></p>
+<p>利用Cron自动延期<br>注意路径问题。</p>
+<p><code>./certbot-auto renew –quiet</code></p>
+<p>crontab -e<br>在打开的编辑器中添加如下内容（每个月1号凌晨3点更新）</p>
+<p><code>0 0 3 * * ./certbot-auto renew –dry-run</code></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/24/magento/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="太平">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="太平的流水帐">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/24/magento/" itemprop="url">magento 笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-24T14:29:10+08:00">
+                2018-02-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/php开发/" itemprop="url" rel="index">
+                    <span itemprop="name">php开发</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/php开发/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="更新索引"><a href="#更新索引" class="headerlink" title="更新索引"></a>更新索引</h2><ol>
+<li>一路cd到目录：magento2/bin 下</li>
+<li>执行 php magento indexer:reindex</li>
+<li>后台 system -&gt; Indexmanage -&gt; reindex all;</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/23/php冷热知识/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -406,10 +744,34 @@
 <blockquote>
 <p>说明<br>mixed call_user_func ( callable $callback [, mixed $parameter [, mixed $… ]] )<br>第一个参数 callback 是被调用的回调函数，其余参数是回调函数的参数。</p>
 </blockquote>
+<p><strong><em>PHP 中 call_user_func 函数 和 call_user_func_array 函数的区别</em></strong></p>
+<blockquote>
+<p>它们的第一个参数都是被调用的回调函数，call_user_func() 还可以有多个参数，它们都是回调函数的参数，call_user_func_array() 只有两个参数，第二个参数是要被传入回调函数的数组，这个数组得是索引数组。</p>
+</blockquote>
+<p>所以它们最大的区别就是：</p>
+<p>. 如果传递一个数组给 call_user_func_array()，数组的每个元素的值都会当做一个参数传递给回调函数，数组的 key 回调掉。<br>. 如果传递一个数组给 call_user_func()，整个数组会当做一个参数传递给回调函数，数字的 key 还会保留住。</p>
+<p>比如有个如下的回调函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function test_callback()&#123;</span><br><span class="line">	$args	= func_get_args();</span><br><span class="line">	$num	= func_num_args();</span><br><span class="line">	echo $num.&quot;个参数：&quot;;</span><br><span class="line">	echo &quot;&lt;pre&gt;&quot;;</span><br><span class="line">	print_r($args);</span><br><span class="line">	echo &quot;&lt;/pre&gt;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后我们分别使用 call_user_func 函数 和 call_user_func_array 函数进行回调：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$args = array (</span><br><span class="line">	&apos;foo&apos;	=&gt; &apos;bar&apos;,</span><br><span class="line">	&apos;hello&apos;	=&gt; &apos;world&apos;,</span><br><span class="line">	0	=&gt; 123</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">call_user_func(&apos;test_callback&apos;, $args);</span><br><span class="line">call_user_func_array(&apos;test_callback&apos;, $args);</span><br></pre></td></tr></table></figure>
+<p>最后输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">1 个参数：</span><br><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [0] =&gt; Array</span><br><span class="line">        (</span><br><span class="line">            [foo] =&gt; bar</span><br><span class="line">            [hello] =&gt; world</span><br><span class="line">            [0] =&gt; 123</span><br><span class="line">        )</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">3个参数：</span><br><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [0] =&gt; bar</span><br><span class="line">    [1] =&gt; world</span><br><span class="line">    [2] =&gt; 123</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <h2 id="func-get-args-、func-get-arg-与func-num-args"><a href="#func-get-args-、func-get-arg-与func-num-args" class="headerlink" title="func_get_args()、func_get_arg()与func_num_args()"></a>func_get_args()、func_get_arg()与func_num_args()</h2><blockquote>
 <p>func_get_args():返回一个包含函数参数列表的数组。<br>func_get_arg():返回指定的参数值。<br>func_num_args():返回调用函数的传入参数个数,类型是整型。</p>
 </blockquote>
-
+<h2 id="spl-autoload-register"><a href="#spl-autoload-register" class="headerlink" title="spl_autoload_register"></a>spl_autoload_register</h2><blockquote>
+<p>spl_autoload_register — 注册给定的函数作为 __autoload 的实现</p>
+</blockquote>
+<p>将函数注册到SPL __autoload函数队列中。如果该队列中的函数尚未激活，则激活它们。</p>
+<p>如果在你的程序中已经实现了<strong>autoload()函数，它必须显式注册到</strong>autoload()队列中。因为 spl_autoload_register()函数会将Zend Engine中的__autoload()函数取代为spl_autoload()或spl_autoload_call()。</p>
+<p>如果需要多条 autoload 函数，spl_autoload_register() 满足了此类需求。 它实际上创建了 autoload 函数的队列，按定义时的顺序逐个执行。相比之下， __autoload() 只可以定义一次。</p>
+<p><strong>参数</strong><br><em>autoload_function</em><br>欲注册的自动装载函数。如果没有提供任何参数，则自动注册 autoload 的默认实现函数spl_autoload()。</p>
+<p><em>throw</em><br>此参数设置了 autoload_function 无法成功注册时， spl_autoload_register()是否抛出异常。</p>
+<p><em>prepend</em><br>如果是 true，spl_autoload_register() 会添加函数到队列之首，而不是队列尾部。</p>
+<p>Example #1 spl_autoload_register() 作为 __autoload() 函数的替代</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">// function __autoload($class) &#123;</span><br><span class="line">//     include &apos;classes/&apos; . $class . &apos;.class.php&apos;;</span><br><span class="line">// &#125;</span><br><span class="line"></span><br><span class="line">function my_autoloader($class) &#123;</span><br><span class="line">    include &apos;classes/&apos; . $class . &apos;.class.php&apos;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">spl_autoload_register(&apos;my_autoloader&apos;);</span><br><span class="line"></span><br><span class="line">// 或者，自 PHP 5.3.0 起可以使用一个匿名函数</span><br><span class="line">spl_autoload_register(function ($class) &#123;</span><br><span class="line">    include &apos;classes/&apos; . $class . &apos;.class.php&apos;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><strong>Example #2 class 未能加载的 spl_autoload_register() 例子</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">namespace Foobar;</span><br><span class="line">class Foo &#123;</span><br><span class="line">    static public function test($name) &#123;</span><br><span class="line">        print &apos;[[&apos;. $name .&apos;]]&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">spl_autoload_register(__NAMESPACE__ .&apos;\Foo::test&apos;); // 自 PHP 5.3.0 起</span><br><span class="line">new InexistentClass;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -513,6 +875,17 @@
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/php开发/" itemprop="url" rel="index">
                     <span itemprop="name">php开发</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/php开发/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
                   </a>
                 </span>
 
@@ -1581,248 +1954,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/15/图片测试/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="太平">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="太平的流水帐">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/15/图片测试/" itemprop="url">图片测试</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-15T08:36:01+08:00">
-                2018-01-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="/img/aaa.jpg" alt="图片测试"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/13/linux批量删除文件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="太平">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="太平的流水帐">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/13/linux批量删除文件/" itemprop="url">linux批量删除文件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-13T16:17:02+08:00">
-                2018-01-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天被一个linux下批量删除的命令浪费了好长时间，这里记下来<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -f `find ./20*/*.jpg`</span><br></pre></td></tr></table></figure></p>
-<p>-f ：强制删除</p>
-<p>##一段js验证网址的代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">function IsURL(str_url)&#123;</span><br><span class="line">        var strRegex = &quot;^((https|http|ftp|rtsp|mms)?://)&quot;</span><br><span class="line">        + &quot;?(([0-9a-z_!~*&apos;().&amp;=+$%-]+: )?[0-9a-z_!~*&apos;().&amp;=+$%-]+@)?&quot; //ftp的user@</span><br><span class="line">        + &quot;(([0-9]&#123;1,3&#125;\.)&#123;3&#125;[0-9]&#123;1,3&#125;&quot; // IP形式的URL- 199.194.52.184</span><br><span class="line">        + &quot;|&quot; // 允许IP和DOMAIN（域名）</span><br><span class="line">        + &quot;([0-9a-z_!~*&apos;()-]+\.)*&quot; // 域名- www.</span><br><span class="line">        + &quot;([0-9a-z][0-9a-z-]&#123;0,61&#125;)?[0-9a-z]\.&quot; // 二级域名</span><br><span class="line">        + &quot;[a-z]&#123;2,6&#125;)&quot; // first level domain- .com or .museum</span><br><span class="line">        + &quot;(:[0-9]&#123;1,4&#125;)?&quot; // 端口- :80</span><br><span class="line">        + &quot;((/?)|&quot; // a slash isn&apos;t required if there is no file name</span><br><span class="line">        + &quot;(/[0-9a-z_!~*&apos;().;?:@&amp;=+$,%#-]+)+/?)$&quot;;</span><br><span class="line">        var re=new RegExp(strRegex);</span><br><span class="line">        //re.test()</span><br><span class="line">        if (re.test(str_url))&#123;</span><br><span class="line">            return (true);</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            return (false);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1873,7 +2004,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1884,7 +2015,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1895,7 +2026,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

@@ -2,16 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2018/02/23/php%E5%86%B7%E7%83%AD%E7%9F%A5%E8%AF%86/</loc>
+    <loc>http://yoursite.com/2018/04/10/Encrypt%E6%B0%B8%E4%B9%85%E5%85%8D%E8%B4%B9SSL%E8%AF%81%E4%B9%A6%E8%BF%87%E7%A8%8B%E6%95%99%E7%A8%8B%E5%8F%8A%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</loc>
     
-    <lastmod>2018-02-23T10:00:15.362Z</lastmod>
+    <lastmod>2018-04-10T02:12:13.789Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/02/24/magento/</loc>
+    
+    <lastmod>2018-02-24T06:35:42.642Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yoursite.com/2018/02/03/PHP%E4%B8%AD%E7%9A%84%E6%8F%92%E4%BB%B6%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86%E5%92%8C%E5%AE%9E%E4%BE%8B/</loc>
     
-    <lastmod>2018-02-03T08:22:32.553Z</lastmod>
+    <lastmod>2018-02-24T06:31:42.586Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/02/23/php%E5%86%B7%E7%83%AD%E7%9F%A5%E8%AF%86/</loc>
+    
+    <lastmod>2018-02-24T02:56:51.635Z</lastmod>
     
   </url>
   
