@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="写在最前面：这是一篇摘抄的文章，最近在学习vue模块化开发，完全没有头叙，es6的严格语法完全也是一头雾水，所以网上各种搜  刚开始用vue或者react，很多时候我们都会把ES6这个大兄弟加入我们的技术栈中。但是ES6那么多那么多特性，我们需要全部都掌握吗？秉着二八原则，掌握好常用的，有用的这个可以让我们快速起飞。 接下来我们就聊聊ES6那些可爱的新特性吧。 1.变量声明const和let我们">
+<meta name="description" content="写在最前面：这是一篇摘抄的文章，最近在学习vue模块化开发，完全没有头叙，es6的严格语法完全也是一头雾水，所以网上各种搜">
 <meta name="keywords" content="js,es6,vue">
 <meta property="og:type" content="article">
 <meta property="og:title" content="学习es6你必须知道的">
 <meta property="og:url" content="http://yoursite.com/2018/02/01/学习es6你必须知道的/index.html">
 <meta property="og:site_name" content="太平的流水帐">
-<meta property="og:description" content="写在最前面：这是一篇摘抄的文章，最近在学习vue模块化开发，完全没有头叙，es6的严格语法完全也是一头雾水，所以网上各种搜  刚开始用vue或者react，很多时候我们都会把ES6这个大兄弟加入我们的技术栈中。但是ES6那么多那么多特性，我们需要全部都掌握吗？秉着二八原则，掌握好常用的，有用的这个可以让我们快速起飞。 接下来我们就聊聊ES6那些可爱的新特性吧。 1.变量声明const和let我们">
+<meta property="og:description" content="写在最前面：这是一篇摘抄的文章，最近在学习vue模块化开发，完全没有头叙，es6的严格语法完全也是一头雾水，所以网上各种搜">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-01T03:04:42.112Z">
+<meta property="og:updated_time" content="2018-04-13T01:45:58.853Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习es6你必须知道的">
-<meta name="twitter:description" content="写在最前面：这是一篇摘抄的文章，最近在学习vue模块化开发，完全没有头叙，es6的严格语法完全也是一头雾水，所以网上各种搜  刚开始用vue或者react，很多时候我们都会把ES6这个大兄弟加入我们的技术栈中。但是ES6那么多那么多特性，我们需要全部都掌握吗？秉着二八原则，掌握好常用的，有用的这个可以让我们快速起飞。 接下来我们就聊聊ES6那些可爱的新特性吧。 1.变量声明const和let我们">
+<meta name="twitter:description" content="写在最前面：这是一篇摘抄的文章，最近在学习vue模块化开发，完全没有头叙，es6的严格语法完全也是一头雾水，所以网上各种搜">
 
 
 
@@ -365,6 +365,7 @@
         <blockquote>
 <p>写在最前面：这是一篇摘抄的文章，最近在学习vue模块化开发，完全没有头叙，es6的严格语法完全也是一头雾水，所以网上各种搜</p>
 </blockquote>
+<a id="more"></a>
 <p>刚开始用vue或者react，很多时候我们都会把ES6这个大兄弟加入我们的技术栈中。但是ES6那么多那么多特性，我们需要全部都掌握吗？秉着二八原则，掌握好常用的，有用的这个可以让我们快速起飞。</p>
 <p>接下来我们就聊聊ES6那些可爱的新特性吧。</p>
 <h2 id="1-变量声明const和let"><a href="#1-变量声明const和let" class="headerlink" title="1.变量声明const和let"></a>1.变量声明const和let</h2><p>我们都是知道在ES6以前，var关键字声明变量。无论声明在何处，都会被视为声明在函数的最顶部(不在函数内即在全局作用域的最顶部)。这就是函数变量提升例如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function aa() &#123;</span><br><span class="line">  if(bool) &#123;</span><br><span class="line">      var test = &apos;hello man&apos;</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">      console.log(test)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>

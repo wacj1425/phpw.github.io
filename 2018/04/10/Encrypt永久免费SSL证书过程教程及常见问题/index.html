@@ -79,21 +79,21 @@
 
 
 
-<meta name="description" content="虽然目前Let’s Encrypt免费SSL证书默认是90天有效期，但是我们也可以到期自动续约，不影响我们的尝试和使用，为了考虑到文章的真实性和以后的实战性，老左准备利用一些时间分篇幅的展现在应用Let’s Encrypt证书的过程，这篇文章分享申请的方法教程。  第一、安装Let’s Encrypt前的准备工作 根据官方的要求，我们在VPS、服务器上部署Let’s Encrypt免费SSL证书">
+<meta name="description" content="虽然目前Let’s Encrypt免费SSL证书默认是90天有效期，但是我们也可以到期自动续约，不影响我们的尝试和使用，为了考虑到文章的真实性和以后的实战性，老左准备利用一些时间分篇幅的展现在应用Let’s Encrypt证书的过程，这篇文章分享申请的方法教程。">
 <meta name="keywords" content="linux,php,ssh">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Encrypt永久免费SSL证书过程教程及常见问题">
 <meta property="og:url" content="http://yoursite.com/2018/04/10/Encrypt永久免费SSL证书过程教程及常见问题/index.html">
 <meta property="og:site_name" content="太平的流水帐">
-<meta property="og:description" content="虽然目前Let’s Encrypt免费SSL证书默认是90天有效期，但是我们也可以到期自动续约，不影响我们的尝试和使用，为了考虑到文章的真实性和以后的实战性，老左准备利用一些时间分篇幅的展现在应用Let’s Encrypt证书的过程，这篇文章分享申请的方法教程。  第一、安装Let’s Encrypt前的准备工作 根据官方的要求，我们在VPS、服务器上部署Let’s Encrypt免费SSL证书">
+<meta property="og:description" content="虽然目前Let’s Encrypt免费SSL证书默认是90天有效期，但是我们也可以到期自动续约，不影响我们的尝试和使用，为了考虑到文章的真实性和以后的实战性，老左准备利用一些时间分篇幅的展现在应用Let’s Encrypt证书的过程，这篇文章分享申请的方法教程。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://images.laozuo.org/wp-content/uploads/2015/12/letsencrypt-2.jpg">
 <meta property="og:image" content="https://images.laozuo.org/wp-content/uploads/2015/12/letsencrypt-3.jpg">
 <meta property="og:image" content="https://images.laozuo.org/wp-content/uploads/2015/12/letsencrypt-4.jpg">
-<meta property="og:updated_time" content="2018-04-10T09:27:57.245Z">
+<meta property="og:updated_time" content="2018-04-13T01:43:34.925Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Encrypt永久免费SSL证书过程教程及常见问题">
-<meta name="twitter:description" content="虽然目前Let’s Encrypt免费SSL证书默认是90天有效期，但是我们也可以到期自动续约，不影响我们的尝试和使用，为了考虑到文章的真实性和以后的实战性，老左准备利用一些时间分篇幅的展现在应用Let’s Encrypt证书的过程，这篇文章分享申请的方法教程。  第一、安装Let’s Encrypt前的准备工作 根据官方的要求，我们在VPS、服务器上部署Let’s Encrypt免费SSL证书">
+<meta name="twitter:description" content="虽然目前Let’s Encrypt免费SSL证书默认是90天有效期，但是我们也可以到期自动续约，不影响我们的尝试和使用，为了考虑到文章的真实性和以后的实战性，老左准备利用一些时间分篇幅的展现在应用Let’s Encrypt证书的过程，这篇文章分享申请的方法教程。">
 <meta name="twitter:image" content="https://images.laozuo.org/wp-content/uploads/2015/12/letsencrypt-2.jpg">
 
 
@@ -369,6 +369,7 @@
         <blockquote>
 <p>虽然目前Let’s Encrypt免费SSL证书默认是90天有效期，但是我们也可以到期自动续约，不影响我们的尝试和使用，为了考虑到文章的真实性和以后的实战性，老左准备利用一些时间分篇幅的展现在应用Let’s Encrypt证书的过程，这篇文章分享申请的方法教程。</p>
 </blockquote>
+<a id="more"></a>
 <p><strong>第一、安装Let’s Encrypt前的准备工作</strong></p>
 <p>根据官方的要求，我们在VPS、服务器上部署Let’s Encrypt免费SSL证书之前，需要系统支持Python2.7以上版本以及支持GIT工具。这个需要根据我们不同的系统版本进行安装和升级，因为有些服务商提供的版本兼容是完善的，尤其是debian环境兼容性比CentOS好一些。<br>比如CentOS 6 64位环境不支持GIT，我们还可以参考”Linux CentOS 6 64位系统安装Git工具环境教程“和”<a href="http://www.laozuo.org/2573.html" target="_blank" rel="noopener">9步骤升级CentOS5系统Python版本到2.7</a>“进行安装和升级。最为 简单的就是Debian环境不支持，可以运行<br><code>apt-get -y install git</code><br>直接安装支持，如果是CentOS直接运行：<br><code>yum -y install git-core</code><br>支持。这个具体遇到问题在讨论和搜索解决方案，因为每个环境、商家发行版都可能不同。在这篇文章中，老左采用的是debian 7 环境</p>
 <p><strong>第二、快速获取Let’s Encrypt免费SSL证书</strong></p>
