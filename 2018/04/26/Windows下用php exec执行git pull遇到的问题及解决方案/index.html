@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="windows,php,ssh," />
 
 
 
@@ -79,14 +79,21 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="我是太平">
-<meta property="og:url" content="http://yoursite.com/about/index.html">
+<meta name="description" content="具体环境是这个样子的，代码仓库在oschina上面，和网站不在一个服务器上，只能是采用webhook这种方法，在网页更目录设置一个php文件，进行手动更新（不是每次都想自动更新）。完整代码如下  123&amp;lt;?phpexec(&amp;quot;git pull 2&amp;gt;&amp;amp;1&amp;quot;,$out);var_export($out); git的全局环境是执行的 C:\Program File">
+<meta name="keywords" content="windows,php,ssh">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows下用php exec执行git pull遇到的问题及解决方案">
+<meta property="og:url" content="http://yoursite.com/2018/04/26/Windows下用php exec执行git pull遇到的问题及解决方案/index.html">
 <meta property="og:site_name" content="太平的流水帐">
+<meta property="og:description" content="具体环境是这个样子的，代码仓库在oschina上面，和网站不在一个服务器上，只能是采用webhook这种方法，在网页更目录设置一个php文件，进行手动更新（不是每次都想自动更新）。完整代码如下  123&amp;lt;?phpexec(&amp;quot;git pull 2&amp;gt;&amp;amp;1&amp;quot;,$out);var_export($out); git的全局环境是执行的 C:\Program File">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-13T10:02:22.151Z">
+<meta property="og:image" content="http://yoursite.com/img/exec/1.png">
+<meta property="og:image" content="http://yoursite.com/img/exec/2.png">
+<meta property="og:updated_time" content="2018-05-09T02:17:51.130Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我是太平">
+<meta name="twitter:title" content="Windows下用php exec执行git pull遇到的问题及解决方案">
+<meta name="twitter:description" content="具体环境是这个样子的，代码仓库在oschina上面，和网站不在一个服务器上，只能是采用webhook这种方法，在网页更目录设置一个php文件，进行手动更新（不是每次都想自动更新）。完整代码如下  123&amp;lt;?phpexec(&amp;quot;git pull 2&amp;gt;&amp;amp;1&amp;quot;,$out);var_export($out); git的全局环境是执行的 C:\Program File">
+<meta name="twitter:image" content="http://yoursite.com/img/exec/1.png">
 
 
 
@@ -116,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/about/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/26/Windows下用php exec执行git pull遇到的问题及解决方案/"/>
 
 
 
 
 
-  <title>我是太平 | 太平的流水帐</title>
+  <title>Windows下用php exec执行git pull遇到的问题及解决方案 | 太平的流水帐</title>
   
 
 
@@ -257,33 +264,182 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/26/Windows下用php exec执行git pull遇到的问题及解决方案/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="太平">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="太平的流水帐">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">我是太平</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
+          <h1 class="post-title" itemprop="name headline">Windows下用php exec执行git pull遇到的问题及解决方案</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-26T15:34:47+08:00">
+                2018-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-      </div>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/运维冷热知识/" itemprop="url" rel="index">
+                    <span itemprop="name">运维冷热知识</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <blockquote>
+<p>具体环境是这个样子的，代码仓库在oschina上面，和网站不在一个服务器上，只能是采用webhook这种方法，在网页更目录设置一个php文件，进行手动更新（不是每次都想自动更新）。<br>完整代码如下</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">exec(&quot;git pull 2&gt;&amp;1&quot;,$out);</span><br><span class="line">var_export($out);</span><br></pre></td></tr></table></figure>
+<p>git的全局环境是执行的 C:\Program Files\Git\cmd\git.exe。需要自行检查添加环境。<br><a id="more"></a><br><strong>第一个问题</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">exec(&quot;git pull &quot;,$out);</span><br><span class="line">var_export($out);</span><br></pre></td></tr></table></figure></p>
+<p>用cmd执行git pull的时候相当完美，刷刷的就更新下来了，但是当执行这个代码的时候发现返回的内容为空，而且还tm的没有更新下来，经过查阅资料，发现应该添加 <code>2&gt;&amp;1</code>,<br>具体原因如下：<br><img src="/img/exec/1.png" alt="图片测试"></p>
+<p>加上输出重定向之后，有了第二个坑</p>
+<p><strong>第二个问题</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array ( 0 =&gt; &apos;Host key verification failed.&apos;, 1 =&gt; &apos;fatal: Could not read from remote repository.&apos;, 2 =&gt; &apos;&apos;, 3 =&gt; &apos;Please make sure you have the correct access rights&apos;, 4 =&gt; &apos;and the repository exists.&apos;, )</span><br></pre></td></tr></table></figure></p>
+<p>居然出现了这个问题，用exec执行不能读取用户目录.ssh文件的公钥。<br>又经过一番折腾，查阅资料，也借鉴这个哥们的答案，但是没有解决我的问题<br><a href="https://blog.csdn.net/thy38/article/details/49827407" target="_blank" rel="noopener">http://blog.csdn.net/thy38/ar…</a>，<br>最后在这个哥们的博客的提示下<br><a href="https://www.jianshu.com/p/a0e761e95465" target="_blank" rel="noopener">http://www.jianshu.com/p/a0e7..</a>.<br>开始查看哪个.ssh文件下面没有公钥，最后用everything查询.ssh文件<br><img src="/img/exec/2.png" alt="图片测试"></p>
+<blockquote>
+<p>最后发现第一个文件里面没有id_ras.pub,拷贝当前用户的pub文件过去后，问题解决了。。</p>
+</blockquote>
+<p>后记：仅发此文以帮助更多的人！</p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/windows/" rel="tag"># windows</a>
+          
+            <a href="/tags/php/" rel="tag"># php</a>
+          
+            <a href="/tags/ssh/" rel="tag"># ssh</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/10/Encrypt永久免费SSL证书过程教程及常见问题/" rel="next" title="Encrypt永久免费SSL证书过程教程及常见问题">
+                <i class="fa fa-chevron-left"></i> Encrypt永久免费SSL证书过程教程及常见问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
