@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="配置apache主配置文件(httpd.conf) 1、查找“#LoadModule rewrite_module modules/mod_rewrite.so” 去掉前面的#号 2、把AllowOverride None 改为 AllowOverride All 3、重启apache 4、新建.htaccess文件，开始使用">
+<meta name="description" content="配置apache主配置文件(httpd.conf)1、查找“#LoadModule rewrite_module modules/mod_rewrite.so” 去掉前面的#号 2、把AllowOverride None 改为 AllowOverride All 3、重启apache 4、新建.htaccess文件，开始使用 php+apache 伪静态后获取动态 get 参数失败的解决办法[QS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Apache 启动.htaccess 的操作方法">
 <meta property="og:url" content="http://yoursite.com/2018/05/12/Apache-启动-htaccess-的操作方法/index.html">
 <meta property="og:site_name" content="太平的流水帐">
-<meta property="og:description" content="配置apache主配置文件(httpd.conf) 1、查找“#LoadModule rewrite_module modules/mod_rewrite.so” 去掉前面的#号 2、把AllowOverride None 改为 AllowOverride All 3、重启apache 4、新建.htaccess文件，开始使用">
+<meta property="og:description" content="配置apache主配置文件(httpd.conf)1、查找“#LoadModule rewrite_module modules/mod_rewrite.so” 去掉前面的#号 2、把AllowOverride None 改为 AllowOverride All 3、重启apache 4、新建.htaccess文件，开始使用 php+apache 伪静态后获取动态 get 参数失败的解决办法[QS">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-12T04:18:56.941Z">
+<meta property="og:updated_time" content="2018-05-12T12:32:39.554Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Apache 启动.htaccess 的操作方法">
-<meta name="twitter:description" content="配置apache主配置文件(httpd.conf) 1、查找“#LoadModule rewrite_module modules/mod_rewrite.so” 去掉前面的#号 2、把AllowOverride None 改为 AllowOverride All 3、重启apache 4、新建.htaccess文件，开始使用">
+<meta name="twitter:description" content="配置apache主配置文件(httpd.conf)1、查找“#LoadModule rewrite_module modules/mod_rewrite.so” 去掉前面的#号 2、把AllowOverride None 改为 AllowOverride All 3、重启apache 4、新建.htaccess文件，开始使用 php+apache 伪静态后获取动态 get 参数失败的解决办法[QS">
 
 
 
@@ -339,11 +339,12 @@
       
 
       
-        <p>配置apache主配置文件(httpd.conf)</p>
-<p>1、查找“#LoadModule rewrite_module modules/mod_rewrite.so” 去掉前面的#号</p>
+        <h2 id="配置apache主配置文件-httpd-conf"><a href="#配置apache主配置文件-httpd-conf" class="headerlink" title="配置apache主配置文件(httpd.conf)"></a>配置apache主配置文件(httpd.conf)</h2><p>1、查找“#LoadModule rewrite_module modules/mod_rewrite.so” 去掉前面的#号</p>
 <p>2、把AllowOverride None 改为 AllowOverride All</p>
 <p>3、重启apache</p>
 <p>4、新建.htaccess文件，开始使用</p>
+<h2 id="php-apache-伪静态后获取动态-get-参数失败的解决办法"><a href="#php-apache-伪静态后获取动态-get-参数失败的解决办法" class="headerlink" title="php+apache 伪静态后获取动态 get 参数失败的解决办法"></a>php+apache 伪静态后获取动态 get 参数失败的解决办法</h2><p>[QSA]表示保留重写url时“？”后面的参数（但参数名不可以重写，只会原样的保留）</p>
+<p>修改 <code>RewriteRule ^active\/(.+)\.html$ active.php?name=$1 [L]</code> 为 <code>RewriteRule ^active\/(.+)\.html$ active.php?name=$1 [L,QSA]</code></p>
 
       
     </div>
@@ -428,8 +429,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -488,6 +498,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置apache主配置文件-httpd-conf"><span class="nav-number">1.</span> <span class="nav-text">配置apache主配置文件(httpd.conf)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#php-apache-伪静态后获取动态-get-参数失败的解决办法"><span class="nav-number">2.</span> <span class="nav-text">php+apache 伪静态后获取动态 get 参数失败的解决办法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

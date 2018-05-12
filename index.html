@@ -340,11 +340,12 @@
       
         
           
-            <p>配置apache主配置文件(httpd.conf)</p>
-<p>1、查找“#LoadModule rewrite_module modules/mod_rewrite.so” 去掉前面的#号</p>
+            <h2 id="配置apache主配置文件-httpd-conf"><a href="#配置apache主配置文件-httpd-conf" class="headerlink" title="配置apache主配置文件(httpd.conf)"></a>配置apache主配置文件(httpd.conf)</h2><p>1、查找“#LoadModule rewrite_module modules/mod_rewrite.so” 去掉前面的#号</p>
 <p>2、把AllowOverride None 改为 AllowOverride All</p>
 <p>3、重启apache</p>
 <p>4、新建.htaccess文件，开始使用</p>
+<h2 id="php-apache-伪静态后获取动态-get-参数失败的解决办法"><a href="#php-apache-伪静态后获取动态-get-参数失败的解决办法" class="headerlink" title="php+apache 伪静态后获取动态 get 参数失败的解决办法"></a>php+apache 伪静态后获取动态 get 参数失败的解决办法</h2><p>[QSA]表示保留重写url时“？”后面的参数（但参数名不可以重写，只会原样的保留）</p>
+<p>修改 <code>RewriteRule ^active\/(.+)\.html$ active.php?name=$1 [L]</code> 为 <code>RewriteRule ^active\/(.+)\.html$ active.php?name=$1 [L,QSA]</code></p>
 
           
         
