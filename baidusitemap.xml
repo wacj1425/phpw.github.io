@@ -4,8 +4,26 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/10/12/hexo/</loc>
+    <lastmod>2018-10-12T08:46:29.000Z</lastmod>
+    <data>
+        <display>
+        <title>hexo常用命令</title>
+        <pubTime>2018-10-12T08:46:29.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="前端" url="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/05/12/Apache-%E5%90%AF%E5%8A%A8-htaccess-%E7%9A%84%E6%93%8D%E4%BD%9C%E6%96%B9%E6%B3%95/</loc>
-    <lastmod>2018-05-12T12:32:39.554Z</lastmod>
+    <lastmod>2018-05-12T12:33:09.580Z</lastmod>
     <data>
         <display>
         <title>Apache 启动.htaccess 的操作方法</title>
@@ -175,9 +193,9 @@
         <title>Encrypt永久免费SSL证书过程教程及常见问题</title>
         <pubTime>2018-04-10T01:37:47.000Z</pubTime>
         
-        <tag>php</tag>
-         
         <tag>linux</tag>
+         
+        <tag>php</tag>
          
         <tag>ssh</tag>
          
